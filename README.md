@@ -15,11 +15,11 @@ Configuração e Execução
 **Passos Gerais**
 
 **1. Clonar o Repositório:**
-   git clone https://github.com/Ander20n/API_Laravel.git
-   Depois abrir o repositório no local onde você salvou no seu computador
+ </br></br>git clone https://github.com/Ander20n/API_Laravel.git
+ </br>Depois abrir o repositório no local onde você salvou no seu computador
 
 **2. Instalar Dependências:**
-   composer install
+   </br></br>composer install
 
 **3. Configurar o Ambiente:**
 
@@ -28,13 +28,13 @@ Configuração e Execução
    - Configure as variáveis de ambiente em .env, especialmente as relacionadas ao banco de dados e ao Passport.
 
 **4. Configurar Passport:**
-   php artisan passport:install
+   </br></br>php artisan passport:install
 
 **5. Executar Migrações e Seeders:**
-   php artisan migrate --seed
+   </br></br>php artisan migrate --seed
 
 **6. Gerar Chave de Aplicação:**
-   php artisan key:generate
+   </br></br>php artisan key:generate
 
 **7. Gerar Documentação Swagger:**
 
@@ -47,7 +47,7 @@ Configuração e Execução
    - Acesse a documentação Swagger em http://seu-domínio/api/documentation.
 
 **8. Executar o Servidor de Desenvolvimento:**
-   php artisan serve
+   </br></br>php artisan serve
 
 **Instruções por Sistema Operacional**
 
