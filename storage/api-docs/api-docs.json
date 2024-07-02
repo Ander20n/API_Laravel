@@ -1,0 +1,665 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API de Tarefas",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/register": {
+            "post": {
+                "summary": "Register a new user",
+                "operationId": "76a1cbaea48a581595406d4dd685cc2c",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password",
+                                    "c_password"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Nome obrigatório",
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "c_password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "User registered successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "object"
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/login": {
+            "post": {
+                "summary": "Login User",
+                "operationId": "dcf90ce65219b0ad51fc32e9f7f69843",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User logged in successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "object"
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/projects": {
+            "get": {
+                "summary": "Get all projects",
+                "operationId": "f16be8d68e3b572c53c51f3ff7d9dd63",
+                "responses": {
+                    "200": {
+                        "description": "List of all projects",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "description": {
+                                                "type": "string"
+                                            },
+                                            "startDate": {
+                                                "type": "string",
+                                                "format": "date"
+                                            },
+                                            "endDate": {
+                                                "type": "string",
+                                                "format": "date"
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            },
+                                            "updated_at": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a new project",
+                "operationId": "d01b2e3b6a3909e290952c59fa25978b",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "startDate",
+                                    "endDate"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "nullable": true
+                                    },
+                                    "startDate": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "endDate": {
+                                        "type": "string",
+                                        "format": "date"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Project created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/projects/{id}": {
+            "get": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Obter um projeto pelo ID",
+                "description": "Retorna os detalhes de um projeto específico.",
+                "operationId": "getProjectById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do projeto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detalhes do projeto retornados com sucesso"
+                    },
+                    "404": {
+                        "description": "Projeto não encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Atualizar um projeto",
+                "description": "Atualiza os detalhes de um projeto existente.",
+                "operationId": "updateProject",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do projeto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "description",
+                                    "startDate",
+                                    "endDate"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Projeto Atualizado"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Descrição atualizada do projeto"
+                                    },
+                                    "startDate": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-07-01"
+                                    },
+                                    "endDate": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-08-01"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Projeto atualizado com sucesso"
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    },
+                    "404": {
+                        "description": "Projeto não encontrado"
+                    },
+                    "500": {
+                        "description": "Falha ao atualizar o projeto"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Deletar um projeto",
+                "description": "Deleta um projeto existente pelo ID.",
+                "operationId": "deleteProject",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do projeto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Projeto deletado com sucesso"
+                    },
+                    "404": {
+                        "description": "Projeto não encontrado"
+                    },
+                    "500": {
+                        "description": "Falha ao deletar o projeto"
+                    }
+                }
+            }
+        },
+        "/api/projects/{id}/tasks": {
+            "get": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Obter tarefas de um projeto",
+                "description": "Retorna as tarefas associadas a um projeto específico.",
+                "operationId": "getProjectTasks",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do projeto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Tarefas do projeto retornadas com sucesso"
+                    },
+                    "404": {
+                        "description": "Projeto não encontrado"
+                    },
+                    "500": {
+                        "description": "Falha ao recuperar as tarefas do projeto"
+                    }
+                }
+            }
+        },
+        "/api/tasks": {
+            "get": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Obter lista de tarefas",
+                "description": "Retorna uma lista de tarefas.",
+                "operationId": "getTasksList",
+                "responses": {
+                    "200": {
+                        "description": "Lista de tarefas retornada com sucesso"
+                    },
+                    "401": {
+                        "description": "Não autorizado"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Criar uma nova tarefa",
+                "description": "Cria uma nova tarefa e retorna os detalhes da tarefa criada.",
+                "operationId": "storeTask",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "description",
+                                    "dueDate",
+                                    "status",
+                                    "project_id"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Nova Tarefa"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Descrição da tarefa"
+                                    },
+                                    "dueDate": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-07-01"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "Pendente"
+                                    },
+                                    "project_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Tarefa criada com sucesso"
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    },
+                    "500": {
+                        "description": "Falha ao criar a tarefa"
+                    }
+                }
+            }
+        },
+        "/api/tasks/{id}": {
+            "get": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Obter uma tarefa pelo ID",
+                "description": "Retorna os detalhes de uma tarefa específica.",
+                "operationId": "getTaskById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da tarefa",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detalhes da tarefa retornados com sucesso"
+                    },
+                    "404": {
+                        "description": "Tarefa não encontrada"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Atualizar uma tarefa",
+                "description": "Atualiza os detalhes de uma tarefa existente.",
+                "operationId": "updateTask",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da tarefa",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "description",
+                                    "dueDate",
+                                    "status",
+                                    "project_id"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Tarefa Atualizada"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Descrição atualizada da tarefa"
+                                    },
+                                    "dueDate": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-07-01"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "Concluído"
+                                    },
+                                    "project_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Tarefa atualizada com sucesso"
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    },
+                    "404": {
+                        "description": "Tarefa não encontrada"
+                    },
+                    "500": {
+                        "description": "Falha ao atualizar a tarefa"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Deletar uma tarefa",
+                "description": "Deleta uma tarefa existente.",
+                "operationId": "deleteTask",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da tarefa",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Tarefa deletada com sucesso"
+                    },
+                    "404": {
+                        "description": "Tarefa não encontrada"
+                    },
+                    "500": {
+                        "description": "Falha ao deletar a tarefa"
+                    }
+                }
+            }
+        }
+    }
+}
